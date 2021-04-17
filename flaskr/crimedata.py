@@ -15,6 +15,7 @@ posns = df['Location']
 offenses = df['OFFENSE_CODE_GROUP']
 for i in range(len(df)):
     crimes.append(Crime(offenses[i], eval(posns[i])))
+    
 # radius in degrees
 def get_num_crimes_in_radius(posn, radius):
     num_crimes_in_radius = 0
