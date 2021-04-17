@@ -3,15 +3,17 @@ from . import gcp
 
 app = Flask(__name__)
 
-@app.route('/route')
-def route(route):
-    return f"Your route is: {route}"
+@app.route("/route/<route_data>")
+def route(route_data):
+    return f"""
+        <div>{route_data}</div>
+    """
 
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
         route = gcp.safest_route(request.form["from"], request.form["to"])
-        return redirect(url_for("route", route=route))
+        return redirect(url_for("route", route_data=route))
     return """
         <form method="post">
             <input type=text name=from>
@@ -19,8 +21,3 @@ def index():
             <input type=submit value=go>
         </form>
     """
-
-
-
-
-#gcp.safest_route("Northeastern University", "Boston University")
