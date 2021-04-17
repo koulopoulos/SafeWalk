@@ -1,7 +1,8 @@
 import googlemaps
+import config
 from datetime import datetime
 
-gmaps = googlemaps.Client(key="AIzaSyBTx2IzKN5vaJjztKYB4MRYZpGOWlKYm34")
+gmaps = googlemaps.Client(key=config.GCP_API_KEY)
 
 def get_directions(from_d, to_d):
     # Request directions via public transit
