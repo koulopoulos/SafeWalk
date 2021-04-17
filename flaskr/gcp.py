@@ -1,6 +1,6 @@
 import googlemaps
-import crimedata
-import config
+from . import crimedata
+from . import config
 from datetime import datetime
 gmaps = googlemaps.Client(key=config.GCP_API_KEY)
 
