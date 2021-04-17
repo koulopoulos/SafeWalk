@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 from scipy import stats
-
+# nothing
 df = pd.read_csv("crime.csv")
 crimes = []
 class Crime:
