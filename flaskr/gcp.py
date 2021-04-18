@@ -19,7 +19,9 @@ def get_routes(g_directions, time):
             "danger_level": "",
             "number_steps": 0,
             "steps": [],
-            "shooting": "No shootings on this route"
+            "directions": [],
+            "tot_distance": 0,
+            "shootings": False
         }
         for g_leg in g_route["legs"]:
             for g_step in g_leg["steps"]:
@@ -30,20 +32,19 @@ def get_routes(g_directions, time):
                 route["danger"] += crime_data[0]
                 route["number_steps"] += 1
                 route["steps"].append(pos)
-                if crime_data[1] > 0:
-                    route["shooting"] = "Shooting on this route"
+                route["directions"].append(g_step["html_instructions"])
+                route["tot_distance"] += 0.000621371*g_step["distance"]["value"]
+                if crime_data[1] > 1:
+                    route["shootings"] = True
                 prev_pos = pos
                 count = count + 1
         if route["danger"] / route["number_steps"] > 100:
             route["danger_level"] = "RED"
-        elif route["danger"] / route["number_steps"] > 75:
-            route["danger_level"] = "ORANGE"
         elif route["danger"] / route["number_steps"] > 50:
             route["danger_level"] = "YELLOW"
-        elif route["danger"] / route["number_steps"] > 25:
-            route["danger_level"] = "YELLOW GREEN ISH"
-        elif route["danger"] / route["number_steps"] > 0:
+        else:
             route["danger_level"] = "GREEN"
         routes.append(route)
+        route["tot_distance"] = round(route["tot_distance"], 2)
     
     return routes
