@@ -1,0 +1,20 @@
+.bi {
+    display: inline-block;
+    vertical-align: -.125em;
+}
+
+.grad-font {
+    background: linear-gradient(-45deg, #FF4E50, #FABD16);
+    background: -webkit-linear-gradient(-45deg, #FF4E50, #FABD16);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.grad-bg {
+    background: linear-gradient(-45deg, #FF4E50, #FABD16);
+    background: -webkit-linear-gradient(-45deg, #FF4E50, #FABD16);
+}
+
+.color-green {
+    color: #FF4E50;
+}
