@@ -17,6 +17,7 @@
     <div class="container container-sm m-5 mx-auto">
         <div class="accordion" id="routeAccordion">
             <div class="panel">
+                <h1>From {{from_l}} to {{to_l}}</h1>
             {% for route in routes %}
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading{{loop.index}}">
@@ -33,6 +34,9 @@
                         <span class="badge bg-dark me-4">History of gun violence</span>
                         {% endif %}
                         <span class="badge bg-primary me-4">{{route.get("tot_distance")}} miles</span>
+                        {% if route.get("safest") == True %}
+                        <span class="badge bg-success me-4">Safest route!</span>
+                        {% endif %}
                     </button>
                     </h2>
                     <div id="collapse{{loop.index}}" class="accordion-collapse collapse" data-bs-parent="#routeAccordion">

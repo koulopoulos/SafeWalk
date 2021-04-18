@@ -21,7 +21,8 @@ def get_routes(g_directions, time):
             "steps": [],
             "directions": [],
             "tot_distance": 0,
-            "shootings": False
+            "shootings": False,
+            "safest_route": False
         }
         for g_leg in g_route["legs"]:
             for g_step in g_leg["steps"]:
@@ -38,13 +39,22 @@ def get_routes(g_directions, time):
                     route["shootings"] = True
                 prev_pos = pos
                 count = count + 1
-        if route["danger"] / route["number_steps"] > 100:
+        if route["danger"] / route["tot_distance"] > 400:
+            print(route["danger"] / route["tot_distance"])
             route["danger_level"] = "RED"
-        elif route["danger"] / route["number_steps"] > 50:
+        elif route["danger"] / route["tot_distance"] > 150:
             route["danger_level"] = "YELLOW"
         else:
             route["danger_level"] = "GREEN"
         routes.append(route)
         route["tot_distance"] = round(route["tot_distance"], 2)
-    
+    min_danger = 9999
+    for route in routes:
+        if (route["danger"] / route["tot_distance"]) < min_danger:
+            print("new safest")
+            min_danger = route["danger"] / route["tot_distance"]
+            safest = route
+    for route in routes:
+        if route == safest:
+            route["safest"] = True       
     return routes
