@@ -11,13 +11,13 @@
 <body class="bg-grad full-height">
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container-fluid mx-4">
-            <a class="navbar-brand lh-lg fs-4 fw-bold grad-font" href="#">Guardian</a>
+            <a class="navbar-brand lh-lg fs-4 fw-bold grad-font" href="#">SafeWalk</a>
         </div>
     </nav>
     <div class="container container-sm m-5 mx-auto">
         <div class="accordion" id="routeAccordion">
             <div class="panel">
-                <h1>From {{from_l}} to {{to_l}}</h1>
+                <h3 class="mt-5 mb-4 grad-font fw-bold">From {{from_l}} to {{to_l}}</h3>
             {% for route in routes %}
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading{{loop.index}}">
@@ -35,7 +35,7 @@
                         {% endif %}
                         <span class="badge bg-primary me-4">{{route.get("tot_distance")}} miles</span>
                         {% if route.get("safest") == True %}
-                        <span class="badge bg-success me-4">Safest route!</span>
+                        <span class="badge bg-light text-dark me-4">🚸&nbsp; Safest route!</span>
                         {% endif %}
                     </button>
                     </h2>
