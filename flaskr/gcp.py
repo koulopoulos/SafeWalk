@@ -47,11 +47,3 @@ def get_routes(g_directions, time):
         routes.append(route)
     
     return routes
-
-def safest_route(from_, to_, time):
-    routes = get_routes(get_directions(from_, to_), time)
-    lowest = routes[0]
-    for route in routes:
-        if route["danger"] < lowest["danger"]:
-            lowest = route
-    return lowest

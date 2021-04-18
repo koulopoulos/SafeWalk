@@ -1,3 +1,10 @@
+body {
+    background: url('park.svg');
+    background-size: 1000px;
+    background-repeat: no-repeat;
+    background-position: center 100px;
+}
+
 .bi {
     display: inline-block;
     vertical-align: -.125em;
@@ -17,4 +24,20 @@
 
 .color-green {
     color: #FF4E50;
+}
+
+.text-subtle {
+    color: #4a4a4a;
+}
+
+::placeholder {
+    opacity: 0.5 !important;
+}
+
+.form-control {
+    border: 2px solid #D0D0D0 !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
 }
