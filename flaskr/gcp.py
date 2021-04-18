@@ -16,18 +16,36 @@ def get_routes(g_directions, time):
     for g_route in g_directions:
         route = {
             "danger": 0,
-            "steps": []
+            "danger_level": "",
+            "number_steps": 0,
+            "steps": [],
+            "shooting": "No shootings on this route"
         }
         for g_leg in g_route["legs"]:
             for g_step in g_leg["steps"]:
                 pos = (g_step["start_location"]["lat"], g_step["start_location"]["lng"])
                 if count == 0:
-                    prev_pos = (pos[0]+0.0001, pos[1]+0.0001)
-                route["danger"] += crimedata.get_weight(pos, crimedata.get_distance(prev_pos, pos), time)
+                    prev_pos = pos
+                crime_data = crimedata.get_data(pos, prev_pos, time)
+                route["danger"] += crime_data[0]
+                route["number_steps"] += 1
                 route["steps"].append(pos)
+                if crime_data[1] > 0:
+                    route["shooting"] = "Shooting on this route"
                 prev_pos = pos
                 count = count + 1
+        if route["danger"] / route["number_steps"] > 100:
+            route["danger_level"] = "RED"
+        elif route["danger"] / route["number_steps"] > 75:
+            route["danger_level"] = "ORANGE"
+        elif route["danger"] / route["number_steps"] > 50:
+            route["danger_level"] = "YELLOW"
+        elif route["danger"] / route["number_steps"] > 25:
+            route["danger_level"] = "YELLOW GREEN ISH"
+        elif route["danger"] / route["number_steps"] > 0:
+            route["danger_level"] = "GREEN"
         routes.append(route)
+    
     return routes
 
 def safest_route(from_, to_, time):
