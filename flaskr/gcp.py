@@ -22,8 +22,8 @@ def get_routes(g_directions, time):
             for g_step in g_leg["steps"]:
                 pos = (g_step["start_location"]["lat"], g_step["start_location"]["lng"])
                 if count == 0:
-                    prev_pos = (pos[0]+0.0001, pos[1]+0.0001)
-                route["danger"] += crimedata.get_weight(pos, crimedata.get_distance(prev_pos, pos), time)
+                    prev_pos = pos
+                route["danger"] += crimedata.get_weight(pos, crimedata.get_distance(prev_pos, pos) / 2, time)
                 route["steps"].append(pos)
                 prev_pos = pos
                 count = count + 1
